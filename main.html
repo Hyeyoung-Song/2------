@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>main_desktop</title>
+    <script src="jquery-1.9.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+ 
+    <script>
+        $(function(){
+            /*
+                앞에 있는 이미지가 z-index가 실행되어 뒤로 빠지고 뒤에 있는 이미지가
+                앞으로 서서히 나타나는 애니메이션-전체적 스토리 진행
+                1.함수선언 fadeOut()
+                2.setInterval();
+            */
+            //1.함수선언 fadeOut()
+            function fadeOut(){
+                var showImg=$('#fadeImg img:eq(0)');
+                var nextImg=$('#fadeImg img:eq(1)');
+                nextImg.addClass('act');
+                nextImg.css('opacity',0).animate({'opacity':1},2000,function(){
+                    showImg.appendTo('#fadeImg').removeClass('act');
+                    //.appendTo()->b를 a뒤에 넣다
+                });
+                console.log(showImg);
+                console.log(nextImg);
+            }
+            
+            //2.setInterval(),clearInterval(참조변수)
+            Time=setInterval(fadeOut,1000);
+           /* $('#fadeImg img').mouseenter(function(){
+                clearInterval(Time);
+            });
+            $('#fadeImg img'),mouseleave(function(){
+                Time=setInterval(fadeOut,1000);
+            });*/
+            $('#fadeImg img').hover(function(){
+                clearInterval(Time)
+            },function(){
+                Time=setInterval(fadeOut,2000);
+            });
+
+        });
+    </script>
+
+<!--팝업창-->
+<script>
+    $(document).ready(function(){
+ 
+        $('.menu_btn>a').on('click', function(){
+            $('.menu_bg').show(); 
+            $('.sidebar_menu').show().animate({
+                right:0
+            });  
+        });
+        $('.close_btn>a').on('click', function(){
+            $('.menu_bg').hide(); 
+            $('.sidebar_menu').animate({
+                right: '-' + 50 + '%'
+                       },function(){
+        $('.sidebar_menu').hide(); 
+        }); 
+                });
+        
+            });
+</script>
+
+
+
+<script>
+    $(function(){
+        var m=$('.nnb>li');
+        var div=$('.contents');
+      
+        m.each(function(){
+            $(this).click(function(e){
+				e.preventDefault();
+                var starName=$(this).attr('id');//m0,m1,m2
+             
+                slideTarget(starName.substr(1,1));/*위치,반환갯수 0,1,2*/ 
+               
+            });
+            function slideTarget(n){
+                var pos=Number(n)*-800;/*문자 데이터를 숫자 데이터로 변경해야합니다*/
+                div.animate({'left':pos},1000);
+            }
+        });
+        
+    });
+</script>
+
+<script>
+    $(function(){
+        var m1=$('.nnb-1>li');
+        var div1=$('.contents1');
+      
+        m1.each(function(){
+            $(this).click(function(e){
+				e.preventDefault();
+                var starName=$(this).attr('id');//m0,m1,m2
+                slideTarget(starName.substr(2,1));/*위치,반환갯수 0,1,2*/ 
+            });
+            function slideTarget(n){
+                var pos=(Number(n)*-100)+'%';/*문자 데이터를 숫자 데이터로 변경해야합니다*/
+                div1.animate({'left':pos},1000);
+            }
+        });
+        
+    });
+</script>
+
+
+    <script>
+        $(function() {
+    $('.intro').addClass('go');
+
+    $('.reload').click(function() {
+        $('.intro').removeClass('go').delay(200).queue(function(next) {
+        $('.intro').addClass('go');
+        next();
+        });
+
+    });
+    })
+    </script>
+
+    <script>
+        var windowWidth = $(window).width(),
+        galleryWidth = $('.gallery').width(),
+        windowMinusGallery = windowWidth - galleryWidth,
+        galleryMargin = windowMinusGallery / 1,
+        numberOfGalleries = $('.gallery').length,
+        counter = 0;
+
+
+        
+        $('#right').click(function(){
+        if (counter < (numberOfGalleries - 1) ) {
+            $('.gallery').animate({
+            left: '-=900px'
+            });
+            counter++;
+        } else {
+            return;
+        }
+        });
+        $('#left').click(function(){
+        if (counter > 0) {
+            $('.gallery').animate({
+            left: '+=900px'
+            });
+            counter--;
+        } else {
+            return;
+        }
+        });
+    </script>    
+
+
+    <script>
+        let curPos = 0;
+        let postion = 0;
+        const IMAGE_WIDTH = 640;
+        const prevBtn = document.querySelector(".prev")
+        const nextBtn = document.querySelector(".next")
+        const images = document.querySelector(".images")
+        
+        function prev(){
+        if(curPos > 0){
+            nextBtn.removeAttribute("disabled")
+            postion += IMAGE_WIDTH;
+            images.style.transform = `translateX(${postion}px)`;
+            curPos = curPos - 1;
+        }
+        if(curPos == 0){
+            prevBtn.setAttribute('disabled', 'true')
+        }
+        }
+        function next(){
+        if(curPos < 3){
+            prevBtn.removeAttribute("disabled")
+            postion -= IMAGE_WIDTH;
+            images.style.transform = `translateX(${postion}px)`;
+            curPos = curPos + 1;
+        }
+        if(curPos == 3){
+            nextBtn.setAttribute('disabled', 'true')
+        }
+        }
+        
+        function init(){
+        prevBtn.setAttribute('disabled', 'true')
+        prevBtn.addEventListener("click", prev)
+        nextBtn.addEventListener("click", next)
+        }
+        
+        init();
+    </script>
+    <!--탭메뉴-->
+    <script>
+    $(function() {
+          function slideMenu() {
+              var activeState = $("#menu-container .menu-list").hasClass("active");
+              $("#menu-container .menu-list").animate({left: activeState ? "0%" : "-100%"}, 400);
+          }
+          $("#menu-wrapper").click(function(event) {
+              event.stopPropagation();
+              $("#hamburger-menu").toggleClass("open");
+              $("#menu-container .menu-list").toggleClass("active");
+              slideMenu();
+  
+              $("body").toggleClass("overflow-hidden");
+          });
+  
+          $(".menu-list").find(".accordion-toggle").click(function() {
+              $(this).next().toggleClass("open").slideToggle("fast");
+              $(this).toggleClass("active-tab").find(".menu-link").toggleClass("active");
+  
+              $(".menu-list .accordion-content").not($(this).next()).slideUp("fast").removeClass("open");
+              $(".menu-list .accordion-toggle").not(jQuery(this)).removeClass("active-tab").find(".menu-link").removeClass("active");
+          });
+      }); // jQuery load
+  </script>
+  
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+    <div id="wrap">
+        <header>
+
+            <div id="gnb">
+                <h1>
+                    <img src="img/logo.png.png" class="logo">
+                </h1>
+                <div class="search">
+                    <form action="/search" method="GET">
+                        <input type="text" name="query" placeholder=" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;우리 아이 이유식을 골라담으로 가기">
+                    </form>
+                </div>
+
+
+                <div id="menu-container">
+                    <div id="menu-wrapper">
+                        <div id="hamburger-menu"><span></span><span></span><span></span></div>
+                        <!-- hamburger-menu -->
+                    </div>
+                    <!-- menu-wrapper -->
+                    <ul class="menu-list accordion">
+                        <li id="nav1" class="toggle accordion-toggle"> 
+                            <span class="icon-plus"></span>
+                            <a class="menu-link" href="#"></a>
+                        </li>
+                        <ul class="menu-submenu accordion-content">
+                          <li class="ft"><a href="#">로그인</a></li>
+                          <li class="ft"><a href="#">회원가입</a></li>
+                          <li class="ft"><a href="#">장바구니</a></li>
+                          <li class="ft" id="ftt"><a href="#">고객센터</a></li>
+                          <li><a href="#">퓨레</a></li>
+                          <li><a href="#">아기간식</a></li>
+                          <li><a href="#">그릭요거트</a></li>
+                          <li><a href="#">아기영양제</a></li>
+                          <li><a href="#">기획전</a></li>
+                          <li><a href="#">진행중인 이벤트</a></li>
+                          <li><a href="#">처음이세요</a></li>
+                          <li><a href="#">제품단계안내</a> </li>
+                          <li><a href="#">맘마셰프 식단표</a></li>
+                          <li><a href="#">식재료 안내</a></li>
+                          <li><a href="#">배송안내</a></li>
+                          <li><a href="#">먹이는 법</a></li>
+                          <li><a href="#">맘마셰프 혜택 안내</a></li>
+                          <li><a href="#">맘마셰프 소개</a></li>
+                          <li><a href="#">맘마셰프TV</a></li>
+                          <li><a href="#">맘마셰프 Awards</a></li>
+                          <li><a href="#">맘마셰프 영양상담</a></li>
+                          <li><a href="#">맘마셰프 매거진</a></li>
+                        </ul> 
+                    </ul>
+                    <!-- menu-list accordion-->
+                </div>
+    
+
+
+
+                <div class="login">
+                    <ul>
+                        <li><a href="#">로그인</a></li>
+                        <li><a href="#">회원가입</a></li>
+                        <li><a href="#">장바구니</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--gnb-->
+            <div id="lnb">
+                <div id="nav">
+                    <ul class="nav_bar">
+                        <li class="nav_bg"><a href="#">빠른주문하기</a></li>
+                        <li class="nav_bg2"><a href="#">맘마셰프스토리</a></li>
+                        <li class="nav_bg2"><a href="#">골라담기</a></li>
+                        <li class="nav_bg2"><a href="#">이벤트 혜택</a></li>
+                        <li class="nav_bg2"><a href="#">마이페이지</a></li>
+                    </ul>
+                    <!--hamburger-->
+
+            <!--lnb-->
+        </header>
+        <!--메인 검색창-->
+        <div id="fadeImg">
+            <img src="img/bbo.png" class="act">
+            <img src="img/sur.png">
+            <img src="img/new.png">
+        </div>
+        <!--메인 배너-->
+
+
+
+        <div id="box1" class="box" >
+            <h2>이유식</h2>
+            
+            <p>우리 아이 연령에 맞는 단계별 맞춤 이유식</p>
+
+            <a href="#"><img src="img/more.png" class="more"></a>
+            
+            <img src="img/left.png" class="R">
+            <img src="img/right.png" class="L">
+           
+            <ul>
+                <li class="rice_a">
+					<a href="#">
+						<img src="img/rice1.png">
+						<p>준비기<br>4개월부터</p>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="img/rice2.png">
+						<p>초기1<br>4~5개월</p>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="img/rice3.png">
+						<p>초기2<br>5~6개월</p>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="img/rice4.png">
+						<p>중기<br>7~8개월</p>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="img/rice5.png">
+						<p>후기<br>9~11개월</p>
+					</a>
+				</li>
+             
+			</ul>
+           
+        </div>
+        <!--box1 end-->
+
+        <div id="box2"class="box">
+            <h2>유아식</h2>
+            
+            <p>건강한 식습관을 위한 균형 잡힌 유아식</p>
+
+            <a href="#"><img src="img/more.png" class="more"></a>
+
+            <div class="food1 food"> 
+                <img src="img/food1.png" class="arrey11">
+                <h3 class="arrey_2"><img src="img/bgn.png" width="150" height="150"></h3>
+                    <div class="food_txt">
+                        <h2 >영양밥(덮밥 2팩)</h2>
+                        <h4>36가지 메뉴 180g/팩</h4>
+                        <h3>76,300원</h3>
+                    </div>
+                </div>
+            <div class="food2 food">
+                <img src="img/food2.png" class="arrey11">
+                <h3 class="arrey_2"><img src="img/bgn.png" width="150" height="150"></h3>
+                    <div class="food_txt">
+                        <h2>영양반찬(반찬 3팩)</h2>
+                        <h4>90가지 메뉴 55~120g/팩</h4>
+                        <h3>115,500원</h3>
+                    </div>
+            </div>
+            <div class="food3 food">
+                <img src="img/food3.png" class="arrey11">
+                <h3 class="arrey_2"><img src="img/bgn.png" width="150" height="150"></h3>
+                    <div class="food_txt">
+                        <h2>영양찬국SET</h2>
+                        <h4>반찬2팩 + 국1팩 100~130g/팩</h4>
+                        <h3>107,100원</h3>
+                    </div>
+            </div>
+            <div class="food4 food">
+                <img src="img/food4.png" class="arrey11">
+                <h3 class="arrey_2"><img src="img/bgn.png" width="150" height="150"></h3>
+                <div class="food_txt">
+                    <h2>올특찬(반찬 2팩)</h2>
+                    <h4>32가지 메뉴 130~180g/팩</h4>
+                    <h3>124,000원</h3>
+                </div>
+            </div>
+        </div>
+        <!--box2-->
+
+        <div id="box3"class="box">
+
+            <h2 class="box3_h2">지금 우리 아이 이유식 단계 체크!</h2>
+            
+            <h3 class="box_h3">올바른 식습관 형성과 성장기 골드타임을 위한 단계별 영양을 챙겨주세요.</h3>
+
+            <ul>
+                <li><a href="#">이유식 첫 시작<br>10배 쌀 미음</a></li>
+                <li><a href="#">알레르기 반응 체크 시기<br>1~2가지 재료로 만든 이유식</a></li>
+                <li><a href="#">철분의 함량이 높은<br>한우사용 단백질로 만든 이유식</a></li>
+                <li><a href="#">건강한 식습관 형성시기<br>다양한 재료로 구성된 이유식</a></li>
+                <li><a href="#">균형잡힌 식단훈련<br>영약식으로 구성된 유아식</a></li>
+            </ul>
+            
+            <img class="box3_logo" src="img/box3_logo.png">
+            <img class="step" src="img/step.png">
+            <img class="baby" src="img/baby.png">
+            
+            <p>아이정보<br>등록</p>
+
+            <img class="arrey" src="img/arrey.png">
+
+            <h3 class="arrey_1">아이의 정보를<br>등록하시면<br>자세히 알려드려요.</h3>
+        </div>
+        <!--box3 end-->
+
+
+        <div id="box4"class="box">
+
+
+
+            <img src="img/middle_banner1.png">
+            <img src="img/middle_banner2.png">
+        </div>
+        <!--box4 end-->
+
+        <div id="box5"class="box">
+
+            <h2>맘마셰프의 친환경 유기농</h2>
+
+            <a href="#"><img src="img/more.png" class="more"></a>
+
+            <ul>
+                <li class="been">
+					<a href="#">
+						<img src="img/qynoa.png">
+						<p>슈퍼푸드 '퀴노아'가 뭐예요?<br>필수아미노산이 균형 있게 함유된 곡식</p>
+					</a>
+				</li>
+                <li class="been">
+					<a href="#">
+						<img src="img/been.png">
+						<p>콩인 듯 채소인 듯 , 프렌치빈<br>단백질과 비타민, 무기질이 풍부한 프렌치빈</p>
+					</a>
+				</li>
+                <li class="been">
+					<a href="#">
+						<img src="img/baby_been.png">
+						<p>예쁘고 귀여운 슈퍼푸드 병아리콩<br>성장기 필수 영양소 '단백질' 가득한 병아리콩</p>
+					</a>
+				</li>
+            </ul>
+        </div>
+        <!--box5 end-->
+
+
+        <!--데스크탑 슬라이드-->
+        <div id="container">
+            <div class="view">
+                <div class="contents">
+                    <div class="box1">  
+                        <a href="#"class="text1">
+                        우리 아이 숙면을 돕는<br>
+                        5가지 방법<br>
+                        육아하는 부모들의 고충,<br>
+                        우리 아이 숙면 문제를 돕는 방법을 알아보아요.
+                        </a>
+                    </div>
+                    <div class="box2"> 
+                        <a href="#"class="text2">
+                            눈빛만 봐도<br>
+                            알 수 있는<br>
+                            7가지 베이비 사인<br>
+                            표정과 몸짓으로 말하는 베이비 사인<br>
+                            총 7가지를 알려드려요.
+                        </a>
+                    </div>
+                    <div class="box3"> 
+                        <a href="#"class="text3">
+                            눈빛만 봐도<br>
+                            알 수 있는<br>
+                            7가지 베이비 사인<br>
+                            표정과 몸짓으로 말하는 베이비 사인<br>
+                            총 7가지를 알려드려요.
+                        </a>
+                    </div>
+                </div>
+
+        <ul class="nnb">
+            <li id="m0"><a href="#"><img src="img/otp1.png"></a></li>
+            <li id="m1"><a href="#"><img src="img/otp2.png"></a></li>
+            <li id="m2"><a href="#"><img src="img/otp3.png"></a></li>
+        </ul>
+    </div>
+	</div>
+
+	 <!--모바일 슬라이드-->
+        <div id="container1">
+            <div class="view1">
+                <div class="contents1">
+                    <div class="box1-1">  
+                        <a href="http://www.ariona.net" >
+                        우리 아이 숙면을 돕는<br>
+                        5가지 방법<br>
+                        육아하는 부모들의 고충,<br>
+                        우리 아이 숙면 문제를 돕는 방법을 알아보아요.
+                        </a>
+                    </div>
+                    <div class="box2-1"> 
+                        <a href="http://www.ariona.net">
+                            눈빛만 봐도<br>
+                            알 수 있는<br>
+                            7가지 베이비 사인<br>
+                            표정과 몸짓으로 말하는 베이비 사인<br>
+                            총 7가지를 알려드려요.
+                        </a>
+                    </div>
+                    <div class="box3-1"> 
+                        <a href="http://www.ariona.net">
+                            눈빛만 봐도<br>
+                            알 수 있는<br>
+                            7가지 베이비 사인<br>
+                            표정과 몸짓으로 말하는 베이비 사인<br>
+                            총 7가지를 알려드려요.
+                        </a>
+                    </div>
+                </div>
+
+        <ul class="nnb-1">
+            <li id="mn0"><a href="#"><img src="img/otp1.png"></a></li>
+            <li id="mn1"><a href="#"><img src="img/otp2.png"></a></li>
+            <li id="mn2"><a href="#"><img src="img/otp3.png"></a></li>
+        </ul>
+    </div>
+</div>
+
+
+
+    
+
+
+        <div id="footer">
+            <span class="ft1">
+                (주)맘마셰프 대표자 : 송혜영<br>
+        
+                사업장소재지<br>
+        
+                F1. 경기 부천시 석천로453번길 92-18 로에스푸드밸리<br>
+        
+                F2. 경기 부천시 석천로 398번길 4 로에스푸드밸리<br>
+        
+                사업자 등록번호 : 130-86-48124 <br>
+                사업자 정보확인 통신판매업신고번호 : 제2010-경기부천-379호<br>
+                개인정보관리책임 : 최서영 이메일 : wlrsua9@eusik.com<br>
+                이용약관 개인정보처리방침 제휴문의 회사소개<br>
+              </span>
+    
+    
+    
+                <span class="ft3">
+                <br>
+                고객센터 <a>1577-7003</a><br>
+                평일 10:00 ~ 17:00 (점심 13:00~14:00)<br>
+                토요일 09:00 ~ 12:00<br>
+                공휴일, 일요일 휴무<br>
+                <a href="#" class="ft_mini1 ft_mini">자주 묻는 질문</a><br><br>
+                <a href="#" class="ft_mini2 ft_mini">1:1 문의</a><br>
+    
+    
+        
+              </span>
+    
+        </div>
+    
+    
+    
+    
+        <div class="ft_02">
+          <p>Copyright 2022 CLE FOODCARE. All Rights Reserved.</p>
+        </div>
+        <!--footer-->
+    
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <!--메인 끝-->
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

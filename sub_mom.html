@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>서브페이지</title>
+    <link rel="stylesheet" href="sub_mom.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function(){
+            var m=$('.lnb>ul>li>a');//클릭할 대상
+            var div=$('.lnb>ul>li>div');//클릭했을때 보여주어야 할 대상
+            m.each(function(){
+                $(this).click(function(){
+                    $(this).next().slideToggle(200).parent()
+                    .siblings().find('div:visible').slideUp(400);
+                });
+            });
+        });
+    </script>
+       
+
+       <!--햄버거메뉴-->
+    <script> 
+      $(document).ready(function(){
+        $("#flip").click(function(){
+          $("#panel").slideDown("slow");
+        });
+      });
+
+      $(document).ready(function(){
+        $("#flip").click(function(){
+          $("#panel").fadeOut()
+        });
+      });
+      </script>
+
+
+  <script>
+      var slideIndex = 1;
+      showSlides(slideIndex);
+
+      function plusSlides(n) {
+      showSlides(slideIndex += n);
+      }
+
+      function currentSlide(n) {
+      showSlides(slideIndex = n);
+      }
+
+      function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("demo");
+      var captionText = document.getElementById("caption");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active";
+      captionText.innerHTML = dots[slideIndex-1].alt;
+      }
+
+      /*효과*/
+          /* Demo purposes only */
+          $(".hover").mouseleave(
+          function () {
+              $(this).removeClass("hover");
+          }
+          );
+  </script>
+
+
+
+
+<script>
+  $(function() {
+        function slideMenu() {
+            var activeState = $("#menu-container .menu-list").hasClass("active");
+            $("#menu-container .menu-list").animate({left: activeState ? "0%" : "-100%"}, 400);
+        }
+        $("#menu-wrapper").click(function(event) {
+            event.stopPropagation();
+            $("#hamburger-menu").toggleClass("open");
+            $("#menu-container .menu-list").toggleClass("active");
+            slideMenu();
+
+            $("body").toggleClass("overflow-hidden");
+        });
+
+        $(".menu-list").find(".accordion-toggle").click(function() {
+            $(this).next().toggleClass("open").slideToggle("fast");
+            $(this).toggleClass("active-tab").find(".menu-link").toggleClass("active");
+
+            $(".menu-list .accordion-content").not($(this).next()).slideUp("fast").removeClass("open");
+            $(".menu-list .accordion-toggle").not(jQuery(this)).removeClass("active-tab").find(".menu-link").removeClass("active");
+        });
+    }); // jQuery load
+</script>
+</head>
+<body>
+    <div id="wrap">
+      <div id="header">
+          <div id="gnb">
+              <h1>
+                  <img src="img/logo.png.png" class="logo">
+              </h1>
+              <div class="search">
+                  <form action="/search" method="GET">
+                      <input type="text" name="query" placeholder="&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;우리 아이 이유식을 골라담으로 가기">
+                  </form>
+              </div>
+              <!--search-->
+              <div id="menu-container">
+                <div id="menu-wrapper">
+                    <div id="hamburger-menu"><span></span><span></span><span></span></div>
+                    <!-- hamburger-menu -->
+                </div>
+                <!-- menu-wrapper -->
+                <ul class="menu-list accordion">
+                    <li id="nav1" class="toggle accordion-toggle"> 
+                        <span class="icon-plus"></span>
+                        <a class="menu-link" href="#"></a>
+                    </li>
+                    <ul class="menu-submenu accordion-content">
+                      <li class="ft"><a href="#">로그인</a></li>
+                      <li class="ft"><a href="#">회원가입</a></li>
+                      <li class="ft"><a href="#">장바구니</a></li>
+                      <li class="ft" id="ftt"><a href="#">고객센터</a></li>
+                      <li><a href="#">퓨레</a></li>
+                      <li><a href="#">아기간식</a></li>
+                      <li><a href="#">그릭요거트</a></li>
+                      <li><a href="#">아기영양제</a></li>
+                      <li><a href="#">기획전</a></li>
+                      <li><a href="#">진행중인 이벤트</a></li>
+                      <li><a href="#">처음이세요</a></li>
+                      <li><a href="#">제품단계안내</a> </li>
+                      <li><a href="#">맘마셰프 식단표</a></li>
+                      <li><a href="#">식재료 안내</a></li>
+                      <li><a href="#">배송안내</a></li>
+                      <li><a href="#">먹이는 법</a></li>
+                      <li><a href="#">맘마셰프 혜택 안내</a></li>
+                      <li><a href="#">맘마셰프 소개</a></li>
+                      <li><a href="#">맘마셰프TV</a></li>
+                      <li><a href="#">맘마셰프 Awards</a></li>
+                      <li><a href="#">맘마셰프 영양상담</a></li>
+                      <li><a href="#">맘마셰프 매거진</a></li>
+                    </ul> 
+                </ul>
+                <!-- menu-list accordion-->
+          </div>
+          </div>
+          <!--gnb-->
+          <div id="lnb">
+              <div id="nav">
+                  <ul class="nav_bar">
+                      <li class="nav_bg"><a href="#">빠른주문하기</a></li>
+                      <li class="nav_bg2"><a href="#">맘마셰프스토리</a></li>
+                      <li class="nav_bg2"><a href="#">골라담기</a></li>
+                      <li class="nav_bg2"><a href="#">이벤트 혜택</a></li>
+                      <li class="nav_bg2"><a href="#">마이페이지</a></li>
+                  </ul>
+                  
+                  <div id="flip"><a class="cssicon hamburger" data-morph="hamburger close" href="#"><span></span></a>
+                  </div>
+                  <!--hamburger-->
+              </div>
+              <!--nav-->
+          </div>
+          <!--lnb-->
+      </div>
+          <!--메인 검색창-->
+      <div class="box-group">
+        <div id="box1">
+            <p>맘마셰프 스토리</p>
+            <div class="lnb">
+              <ul>
+                  <li><a href="#">맘마셰프 소개</a>
+                    <div class="lnb01">
+                      <ul>
+                        <li><a href="#">처음이세요</a></li>
+                        <li><a href="#">클레 식단표</a></li>
+                        <li><a href="#">식재료 안내</a></li>
+                        <li><a href="#">배송안내</a></li>
+                      </ul>
+                  </div>
+                  </li>
+                  <li><a href="#">최초 유리병 이유식</a>
+                    <div class="lnb01">
+                      <ul>
+                        <li><a href="#">준비기</a></li>
+                        <li><a href="#">초기</a></li>
+                        <li><a href="#">중기</a></li>
+                        <li><a href="#">완료기</a></li>
+                      </ul>
+                  </div>
+                  </li>
+                  <li><a href="#">맘마 TV</a>
+                    <div class="lnb01">
+                      <ul>
+                        <li><a href="#">맘마스토리</a></li>
+                        <li><a href="#">맘마쿡</a></li>
+                        <li><a href="#">생생리뷰</a></li>
+                        <li><a href="#">실시간 다시보기</a></li>
+                      </ul>
+                  </div>
+                  </li>
+                  <li><a href="#">맘마 Awards</a>
+                    <div class="lnb01">
+                      <ul>
+                        <li><a href="#">현장스케치</a></li>
+                        <li><a href="#">수상내역</a></li>
+                        <li><a href="#">실시간 투표</a></li>
+                        <li><a href="#">주요뉴스</a></li>
+                      </ul>
+                  </div>
+                  </li>
+                  <li><a href="#">맘마 영양상담</a>
+                    <div class="lnb01">
+                      <ul>
+                        <li><a href="#">게시판 문의</a></li>
+                        <li><a href="#">카카오톡 문의</a></li>
+                        <li><a href="#">전화 문의</a></li>
+                        <li><a href="#">고객센터</a></li>
+                      </ul>
+                  </div>
+                  </li>
+                  <li><a href="#">맘마 매거진</a>
+                    <div class="lnb01">
+                      <ul>
+                        <li><a href="#">전체</a></li>
+                        <li><a href="#">육아상식</a></li>
+                        <li><a href="#">건강정보</a></li>
+                        <li><a href="#">영양정보</a></li>
+                      </ul>
+                  </div>
+                  </li>
+            </ul>
+            </div>
+        </div>
+        <!--box1 end-->
+        <div class="sub_banner">
+            <img src="img/sub.png">
+        </div>
+        <!--sub_banner end-->
+      </div>
+      <!--box-group end-->
+      <div class="null">
+        <ul>
+          <li><a href="#" class="bob">전체</a></li>
+          <li><a href="#">육아상식</a></li>
+          <li><a href="#">건강정보</a></li>
+          <li><a href="#">영양정보</a></li>
+        </ul>
+      </div>
+
+      <div class="mini">
+        <div id="box_mini1" class="box">
+          <figure class="snip1382">
+              <img src="img/sub1.png" alt="sample99" />
+              <figcaption>
+                  <p>#육아상식<br>이유식을 먹지않는 아이를 위한 5가지 방법<br>행복한 식사 시간을 위한 해결 방법 </p>
+                <div class="icons"><a href="#"><i class="ion-chatbubbles"><img src="img/Talks.png" width="35" height="35"></i></a>
+                  <a href="#"> <i class="ion-person-add"><img src="img/p.png" width="31" height="35"></i></a>
+                  <a href="#"> <i class="ion-heart"><img src="img/ht.png" width="35" height="32"></i></a>
+                </div>
+              </figcaption>  
+          </figure>
+          <figure class="snip1382">
+              <img src="img/sub12.png" alt="sample99" />
+              <figcaption>
+                  <p>#육아상식 편식는 아이,<br>푸드네오포비아 극복하기<br>새로운 음신에 대한 두려움은 이제 그만 </p>
+                <div class="icons"><a href="#"><i class="ion-chatbubbles"><img src="img/Talks.png" width="35" height="35"></i></a>
+                  <a href="#"> <i class="ion-person-add"><img src="img/p.png" width="31" height="35"></i></a>
+                  <a href="#"> <i class="ion-heart"><img src="img/ht.png" width="35" height="32"></i></a>
+                </div>
+              </figcaption>  
+          </figure>
+          <figure class="snip1382">
+              <img src="img/sub3.png" alt="sample99" />
+              <figcaption>
+                  <p>#육아상식<br>우리 아이 발달과정 확인하기<br>우리아이, 잘 크고 있는 걸까?</p>
+                <div class="icons"><a href="#"><i class="ion-chatbubbles"><img src="img/Talks.png" width="35" height="35"></i></a>
+                  <a href="#"> <i class="ion-person-add"><img src="img/p.png" width="31" height="35"></i></a>
+                  <a href="#"> <i class="ion-heart"><img src="img/ht.png" width="35" height="32"></i></a>
+                </div>
+              </figcaption>  
+          </figure>
+          <figure class="snip1382">
+              <img src="img/sub4.png" alt="sample99" />
+              <figcaption>
+                  <p>#육아상식<br>이유식을 먹지않는 아이를 위한 5가지 방법<br>행복한 식사 시간을 위한 해결 방법  copy 4</p>
+                <div class="icons"><a href="#"><i class="ion-chatbubbles"><img src="img/Talks.png" width="35" height="35"></i></a>
+                  <a href="#"> <i class="ion-person-add"><img src="img/p.png" width="31" height="35"></i></a>
+                  <a href="#"> <i class="ion-heart"><img src="img/ht.png" width="35" height="32"></i></a>
+                </div>
+              </figcaption>  
+          </figure>
+        </div>
+        <!--mini1-->
+
+        <div id="box_mini2" class="box">
+          <figure class="snip1382">
+              <img src="img/sub5.png" alt="sample99" />
+              <figcaption>
+                  <p>#육아상식<br>아이의 공감 능력을 키우는 부모의 대화법<br>공감 능력 발달이 왜 중요할까요?</p>
+                <div class="icons"><a href="#"><i class="ion-chatbubbles"><img src="img/Talks.png" width="35" height="35"></i></a>
+                  <a href="#"> <i class="ion-person-add"><img src="img/p.png" width="31" height="35"></i></a>
+                  <a href="#"> <i class="ion-heart"><img src="img/ht.png" width="35" height="32"></i></a>
+                </div>
+              </figcaption>  
+          </figure>
+          <figure class="snip1382">
+              <img src="img/sub6.png" alt="sample99" />
+              <figcaption>
+                  <p>#건강정보<br>면역력 쑥쑥!장 건강을 지켜요.<br>우리 아이 장 건강 지키는 법 </p>
+                <div class="icons"><a href="#"><i class="ion-chatbubbles"><img src="img/Talks.png" width="35" height="35"></i></a>
+                  <a href="#"> <i class="ion-person-add"><img src="img/p.png" width="31" height="35"></i></a>
+                  <a href="#"> <i class="ion-heart"><img src="img/ht.png" width="35" height="32"></i></a>
+                </div>
+              </figcaption>  
+          </figure>
+          <figure class="snip1382">
+              <img src="img/sub7.png" alt="sample99" />
+              <figcaption>
+                  <p>#건강정보<br>우리 아이 숙면을 돕는 5가지 방법<br>육아하는 부모들의 고충, 수면 문제를<br>돕는 방법을 알아보아요.</p>
+                <div class="icons"><a href="#"><i class="ion-chatbubbles"><img src="img/Talks.png" width="35" height="35"></i></a>
+                  <a href="#"> <i class="ion-person-add"><img src="img/p.png" width="31" height="35"></i></a>
+                  <a href="#"> <i class="ion-heart"><img src="img/ht.png" width="35" height="32"></i></a>
+                </div>
+              </figcaption>  
+          </figure>
+          <figure class="snip1382">
+              <img src="img/sub8.png" alt="sample99" />
+              <figcaption>
+                  <p>#건강정보<br>환절기 감기 걱정 끝! '배숙' 레시피<br>배숙의 효능을 알아보아요.</p>
+                <div class="icons"><a href="#"><i class="ion-chatbubbles"><img src="img/Talks.png" width="35" height="35"></i></a>
+                  <a href="#"> <i class="ion-person-add"><img src="img/p.png" width="31" height="35"></i></a>
+                  <a href="#"> <i class="ion-heart"><img src="img/ht.png" width="35" height="32"></i></a>
+                </div>
+              </figcaption>  
+          </figure>
+        </div>
+        <div id="box_mini3" class="box">
+
+          <figure class="snip1382">
+              <img src="img/sub9.png" alt="sample99" />
+              <figcaption>
+                  <p>#건강정보<br>똑똑한 아이로 키우는 좋은 생활습관<br>두뇌 발달에 대해 알아보아요!</p>
+                <div class="icons"><a href="#"><i class="ion-chatbubbles"><img src="img/Talks.png" width="35" height="35"></i></a>
+                  <a href="#"> <i class="ion-person-add"><img src="img/p.png" width="31" height="35"></i></a>
+                  <a href="#"> <i class="ion-heart"><img src="img/ht.png" width="35" height="32"></i></a>
+                </div>
+              </figcaption>  
+          </figure>
+          <figure class="snip1382">
+              <img src="img/sub10.png" alt="sample99" />
+              <figcaption>
+                  <p>#건강정보<br>우리 아이 시기별 예방접종 TIP<br>시기별 예방접종과 주의사항</p>
+                <div class="icons"><a href="#"><i class="ion-chatbubbles"><img src="img/Talks.png" width="35" height="35"></i></a>
+                  <a href="#"> <i class="ion-person-add"><img src="img/p.png" width="31" height="35"></i></a>
+                  <a href="#"> <i class="ion-heart"><img src="img/ht.png" width="35" height="32"></i></a>
+                </div>
+              </figcaption>  
+          </figure>
+          <figure class="snip1382">
+              <img src="img/sub11.png" alt="sample99" />
+              <figcaption>
+                  <p>#영양정보<br>우리 아이 성장기 단백질 섭취, 왜 중요할까요?<br>뇌 성장 황금기의 단백질 섭취는 매우 중요해요!</p>
+                <div class="icons"><a href="#"><i class="ion-chatbubbles"><img src="img/Talks.png" width="35" height="35"></i></a>
+                  <a href="#"> <i class="ion-person-add"><img src="img/p.png" width="31" height="35"></i></a>
+                  <a href="#"> <i class="ion-heart"><img src="img/ht.png" width="35" height="32"></i></a>
+                </div>
+              </figcaption>  
+          </figure>
+          <figure class="snip1382">
+              <img src="img/sub13.png" alt="sample99" />
+              <figcaption>
+                  <p>#영양정보<br>영양가득 해산물, 언제부터 먹일 수 있나요?</p>
+                <div class="icons"><a href="#"><i class="ion-chatbubbles"><img src="img/Talks.png" width="35" height="35"></i></a>
+                  <a href="#"> <i class="ion-person-add"><img src="img/p.png" width="31" height="35"></i></a>
+                  <a href="#"> <i class="ion-heart"><img src="img/ht.png" width="35" height="32"></i></a>
+                </div>
+              </figcaption>  
+          </figure>
+        </div>
+        <!--mini3-->
+      </div>
+      
+      <div class="btn">
+          <form action="#" method="get">
+                  <button id="ss" type="button"><a href="#">1</a></button>
+                  <button id="ss" type="reset" value="내용초기화"><a href="#">2</a></button>
+                  <button id="ss" type= "submit" value="내용전달"><a href="#">3</a></button>
+                  <button id="ss" type= "submit" value="내용전달"><a href="#">4</a></button>
+                  <button id="ss" type= "submit" value="내용전달"><a href="#">5</a></button>
+                  <button id="ss" type= "submit" value="내용전달"><a href="#">></a></button>
+          </form>
+      </div>
+
+      <div id="footer">
+          <span class="ft1">
+              (주)맘마셰프 대표자 : 송혜영<br>
+
+              사업장소재지<br>
+
+              F1. 경기 부천시 석천로453번길 92-18 로에스푸드밸리<br>
+
+              F2. 경기 부천시 석천로 398번길 4 로에스푸드밸리<br>
+
+              사업자 등록번호 : 130-86-48124 <br>
+              사업자 정보확인 통신판매업신고번호 : 제2010-경기부천-379호<br>
+              개인정보관리책임 : 최서영 이메일 : wlrsua9@eusik.com<br>
+              이용약관 개인정보처리방침 제휴문의 회사소개<br>
+          </span>
+          <span class="ft3">
+            <br>
+            고객센터 <a>1577-7003</a><br>
+            평일 10:00 ~ 17:00 (점심 13:00~14:00)<br>
+            토요일 09:00 ~ 12:00<br>
+            공휴일, 일요일 휴무<br>
+            <a href="#" class="ft_mini1 ft_mini">자주 묻는 질문</a><br><br>
+            <a href="#" class="ft_mini2 ft_mini">1:1 문의</a><br>
+          </span>
+      </div>
+
+      <a href="#"><img src="img/kakao.png" class="icon1 icon"></a>
+      <a href="#"><img src="img/face.book.png" class="icon2 icon"></a>
+      <a href="#"><img src="img/instagram.png" class="icon3 icon"></a>
+
+      <div class="ft_02">
+        <p>Copyright 2022 CLE FOODCARE. All Rights Reserved.</p>
+      </div>
+  </div>
+  <!--wrap-->
+</body>
+</html>
