@@ -390,7 +390,7 @@ header{
 
 #lnb{
 height: 75px;
-margin-left: 268px;
+margin-left: 21vw;
 text-align: center;
 }
 .nav_bar>li{
@@ -414,12 +414,6 @@ text-align: center;
   color: #444343;
 }
 
-.nav_bg{
-  border: 1px solid #f5e9ed;
-  background-color: #f5e9ed;
-  border-radius: 5px;
-  padding: 10px 20px;
-}
 
 .nav_bg a:hover{color:#fc7878;}
 
@@ -692,15 +686,6 @@ margin: 20px 0;
 .icon:hover{
   transform: scale(1.1);
 }
-
-}
-
-
-
-
-
-
-
 
 
 
